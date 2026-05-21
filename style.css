@@ -205,6 +205,7 @@ h1, h2, h3 {
 .hero-actions {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* Code Visual */
