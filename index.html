@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00f0ff">
+    <title>BudgetSync | Zero-Trust Financial Tracker</title>
+    <meta name="description" content="Mobile-based, cross-platform financial application designed to passively track expenses and maintain budgets via Native SMS Sync.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./assets/icon-192.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles & Scripts -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Background Glow Effects -->
+    <div class="bg-glow glow-primary"></div>
+    <div class="bg-glow glow-secondary"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar glassmorphism">
+        <div class="logo">
+            <i data-lucide="shield-check" class="text-cyan"></i>
+            Budget<span>Sync</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><button id="installBtn" class="btn btn-neon hidden"><i data-lucide="download"></i> Install App</button></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge glassmorphism">
+                    <span class="pulse"></span> Version 1.0 (Production)
+                </div>
+                <h1 class="hero-title">Automated <span class="text-gradient">Financial</span><br>Telemetry.</h1>
+                <p class="hero-subtitle">
+                    Eradicate manual cognitive friction. A Zero-Trust Cloud Architecture utilizing a custom Android Java bridge to securely intercept, parse, and log your bank SMS notifications in real-time.
+                </p>
+                <div class="hero-actions">
+                    <a href="#features" class="btn btn-outline"><i data-lucide="activity"></i> Explore Tech</a>
+                    <a href="https://github.com/yourusername/budget-management" target="_blank" class="btn btn-solid"><i data-lucide="github"></i> View Source</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual glassmorphism tilt-effect">
+                <div class="code-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="filename">ExpenseParser.js</span>
+                </div>
+                <pre><code><span class="keyword">const</span> extractAmount = (smsString) => {
+  <span class="comment">// O(N) Regex algorithm</span>
+  <span class="keyword">const</span> regex = <span class="string">/(?:Rs\.?|INR)\s*(\d+(?:\.\d{1,2})?)/i</span>;
+  <span class="keyword">const</span> match = smsString.match(regex);
+  <span class="keyword">if</span> (!match) <span class="keyword">return null</span>;
+  
+  <span class="keyword">return</span> <span class="keyword">parseFloat</span>(match[1]);
+};
+<span class="comment">// Securely dispatching to Supabase</span>
+<span class="keyword">await</span> syncToCloud(extractAmount(rawSms));</code></pre>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features" id="features">
+            <h2 class="section-title">Core <span class="text-gradient">Innovations</span></h2>
+            <div class="grid-container">
+                <div class="feature-card glassmorphism">
+                    <div class="icon-box cyan"><i data-lucide="zap"></i></div>
+                    <h3>Passive Automation</h3>
+                    <p>Background native SMS intercepts drastically reduce manual data entry friction, eliminating human error.</p>
+                </div>
+                <div class="feature-card glassmorphism">
+                    <div class="icon-box teal"><i data-lucide="lock"></i></div>
+                    <h3>Zero-Trust Security</h3>
+                    <p>Rigorous remote JWT validation mitigates XSS, CSRF, and SQLi vectors. Local SQLite fallback for offline routing.</p>
+                </div>
+                <div class="feature-card glassmorphism">
+                    <div class="icon-box blue"><i data-lucide="cpu"></i></div>
+                    <h3>Deterministic Extraction</h3>
+                    <p>O(N) Regex algorithms ensure no unhandled computational exceptions during the parsing lifecycle.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section class="architecture" id="architecture">
+            <h2 class="section-title">Decoupled <span class="text-gradient">Architecture</span></h2>
+            <div class="arch-container glassmorphism">
+                <div class="arch-step">
+                    <i data-lucide="smartphone"></i>
+                    <h4>Client UI</h4>
+                    <p>React.js (v18+) with purely functional, Hook-driven states and Material-UI styling.</p>
+                </div>
+                <i data-lucide="arrow-right" class="arch-arrow"></i>
+                <div class="arch-step">
+                    <i data-lucide="layers"></i>
+                    <h4>Native Bridge</h4>
+                    <p>Capacitor.js (v6.0) for threaded Java injection directly into the JS runtime.</p>
+                </div>
+                <i data-lucide="arrow-right" class="arch-arrow"></i>
+                <div class="arch-step">
+                    <i data-lucide="database"></i>
+                    <h4>Persistence</h4>
+                    <p>Supabase Cloud Infrastructure utilizing PostgreSQL v15 for secure synchronization.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glassmorphism">
+        <p>M.Sc Computer Science Project &copy; 2026 Pavin P</p>
+    </footer>
+
+    <!-- Script for Lucide Icons & PWA -->
+    <script src="./script.js"></script>
+</body>
+</html>
