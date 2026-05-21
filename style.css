@@ -349,8 +349,11 @@ footer {
   .hero-actions {
     justify-content: center;
   }
+  .nav-links a {
+    display: none; /* hide only the text links on mobile */
+  }
   .nav-links {
-    display: none; /* simple hidden on small mobile for now */
+    gap: 0.5rem;
   }
   .arch-container {
     flex-direction: column;
