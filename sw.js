@@ -1,31 +1,32 @@
-const CACHE_NAME = 'budget-sync-v1';
-const urlsToCache = [
-  './',
-  './index.html',
-  './style.css',
-  './script.js',
-  './manifest.json',
-  './assets/icon-192.png',
-  './assets/icon-512.png'
-];
+const CACHE_NAME = 'budget-sync-v2';
 
+// Install without waiting
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-  );
+    self.skipWaiting();
 });
 
+// Activate and claim clients
+self.addEventListener('activate', event => {
+    event.waitUntil(clients.claim());
+});
+
+// Dynamic cache-first strategy
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
-  );
+    // Only cache GET requests
+    if (event.request.method !== 'GET') return;
+
+    event.respondWith(
+        caches.match(event.request).then(response => {
+            // Return cached response if found, else fetch from network
+            return response || fetch(event.request).then(fetchRes => {
+                return caches.open(CACHE_NAME).then(cache => {
+                    // Dynamically cache the new resource
+                    cache.put(event.request, fetchRes.clone());
+                    return fetchRes;
+                });
+            });
+        }).catch(() => {
+            // Fallback (do nothing if offline and not in cache)
+        })
+    );
 });
